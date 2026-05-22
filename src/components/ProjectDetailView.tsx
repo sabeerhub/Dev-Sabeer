@@ -56,7 +56,7 @@ export function ProjectDetailView({ projectId, navigate }: ProjectDetailViewProp
           </div>
           <div className="space-y-1">
             <span className="text-[9px] text-zinc-400 block uppercase">Canonical URL Target</span>
-            <span className="text-zinc-900 block font-semibold break-all">https://dev-sabeer.vercel.app{project.path}</span>
+            <span className="text-zinc-900 block font-semibold break-all">https://sabeer-ai.vercel.app{project.path}</span>
           </div>
         </div>
       </section>

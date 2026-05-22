@@ -83,14 +83,14 @@ export default function App() {
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://dev-sabeer.vercel.app/#person",
+        "@id": "https://sabeer-ai.vercel.app/#person",
         "name": "Mustapha Abdulsalam",
         "alternateName": "Sabeer",
         "brand": {
           "@type": "Brand",
           "name": "Sabeer-Verse"
         },
-        "url": "https://dev-sabeer.vercel.app",
+        "url": "https://sabeer-ai.vercel.app",
         "sameAs": [
           "https://linkedin.com/in/masabeer",
           "https://github.com/sabeerhub",
@@ -103,16 +103,16 @@ export default function App() {
       },
       currentProject ? {
         "@type": "CreativeWork",
-        "@id": `https://dev-sabeer.vercel.app/projects/${currentProject.id}/#work`,
+        "@id": `https://sabeer-ai.vercel.app/projects/${currentProject.id}/#work`,
         "name": currentProject.title,
         "headline": currentProject.tagline,
         "description": currentProject.description,
-        "creator": { "@id": "https://dev-sabeer.vercel.app/#person" },
+        "creator": { "@id": "https://sabeer-ai.vercel.app/#person" },
         "keywords": currentProject.techStack.join(', ')
       } : {
         "@type": "WebSite",
         "name": "Sabeer-Verse",
-        "url": "https://dev-sabeer.vercel.app",
+        "url": "https://sabeer-ai.vercel.app",
         "description": activePageDesc
       }
     ]

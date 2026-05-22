@@ -38,17 +38,17 @@ export function ContactView() {
     {
       id: "anchor-text-1",
       anchorText: "Mustapha Sabeer Abdulsalam",
-      html: `<a href="https://dev-sabeer.vercel.app" title="Mustapha Sabeer Abdulsalam" target="_blank">Mustapha &ldquo;Sabeer&rdquo; Abdulsalam</a>`
+      html: `<a href="https://sabeer-ai.vercel.app" title="Mustapha Sabeer Abdulsalam" target="_blank">Mustapha &ldquo;Sabeer&rdquo; Abdulsalam</a>`
     },
     {
       id: "anchor-text-2",
       anchorText: "Sabeer Frontend Developer",
-      html: `<a href="https://dev-sabeer.vercel.app/projects" title="Sabeer Frontend Developer" target="_blank">Sabeer Frontend Developer Portfolio</a>`
+      html: `<a href="https://sabeer-ai.vercel.app/projects" title="Sabeer Frontend Developer" target="_blank">Sabeer Frontend Developer Portfolio</a>`
     },
     {
       id: "anchor-text-3",
       anchorText: "Sabeer-Verse fintech",
-      html: `<a href="https://dev-sabeer.vercel.app/projects/zero-bank" title="Sabeer-Verse Zero Bank" target="_blank">Zero Bank Case Study</a>`
+      html: `<a href="https://sabeer-ai.vercel.app/projects/zero-bank" title="Sabeer-Verse Zero Bank" target="_blank">Zero Bank Case Study</a>`
     }
   ];
 

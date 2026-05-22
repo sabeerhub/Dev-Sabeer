@@ -29,7 +29,7 @@ export function SeoHead({ title, description, path, project }: SeoProps) {
       canonical.setAttribute('rel', 'canonical');
       document.head.appendChild(canonical);
     }
-    canonical.setAttribute('href', `https://dev-sabeer.vercel.app${path}`);
+    canonical.setAttribute('href', `https://sabeer-ai.vercel.app${path}`);
 
     // 4. Inject Dynamic JSON-LD Schema
     let dynamicSchema = document.getElementById('dynamic-jsonld-schema');
@@ -47,7 +47,7 @@ export function SeoHead({ title, description, path, project }: SeoProps) {
     const personSchema = {
       "@context": "https://schema.org",
       "@type": "Person",
-      "@id": "https://dev-sabeer.vercel.app/#person",
+      "@id": "https://sabeer-ai.vercel.app/#person",
       "name": "Mustapha Abdulsalam",
       "alternateName": "Sabeer",
       "jobTitle": "Frontend Developer & AI Solutions Builder",
@@ -55,7 +55,7 @@ export function SeoHead({ title, description, path, project }: SeoProps) {
         "@type": "Brand",
         "name": "Sabeer-Verse"
       },
-      "url": "https://dev-sabeer.vercel.app",
+      "url": "https://sabeer-ai.vercel.app",
       "sameAs": [
         "https://linkedin.com/in/masabeer",
         "https://github.com/sabeerhub",
@@ -75,14 +75,14 @@ export function SeoHead({ title, description, path, project }: SeoProps) {
           personSchema,
           {
             "@type": "CreativeWork",
-            "@id": `https://dev-sabeer.vercel.app/projects/${project.id}/#work`,
+            "@id": `https://sabeer-ai.vercel.app/projects/${project.id}/#work`,
             "name": project.title,
             "headline": project.tagline,
             "description": project.description,
             "creator": {
-              "@id": "https://dev-sabeer.vercel.app/#person"
+              "@id": "https://sabeer-ai.vercel.app/#person"
             },
-            "url": `https://dev-sabeer.vercel.app/projects/${project.id}`,
+            "url": `https://sabeer-ai.vercel.app/projects/${project.id}`,
             "genre": project.category,
             "keywords": project.techStack.join(', '),
             "abstract": project.problem,
@@ -98,12 +98,12 @@ export function SeoHead({ title, description, path, project }: SeoProps) {
           personSchema,
           {
             "@type": "WebSite",
-            "@id": "https://dev-sabeer.vercel.app/#website",
-            "url": "https://dev-sabeer.vercel.app",
+            "@id": "https://sabeer-ai.vercel.app/#website",
+            "url": "https://sabeer-ai.vercel.app",
             "name": "Sabeer-Verse",
             "description": description,
             "publisher": {
-              "@id": "https://dev-sabeer.vercel.app/#person"
+              "@id": "https://sabeer-ai.vercel.app/#person"
             }
           }
         ]
