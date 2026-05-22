@@ -13,6 +13,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/projects/icall-pro",
     "/projects/sabeer-xpress",
     "/blog",
+    "/blog/how-i-built-zero-bank-fintech-system",
+    "/blog/building-secure-vtu-platform-nodejs",
+    "/blog/real-time-webrtc-architecture-explained",
+    "/blog/how-i-think-as-frontend-developer-2026",
+    "/blog/ai-prompt-engineering-for-developers",
     "/contact",
   ];
 

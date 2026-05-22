@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
-import { Project } from '../types';
+import { Project, BlogPost } from '../types';
 
 interface SeoProps {
   title: string;
   description: string;
   path: string;
   project?: Project;
+  blogPost?: BlogPost;
 }
 
-export function SeoHead({ title, description, path, project }: SeoProps) {
+export function SeoHead({ title, description, path, project, blogPost }: SeoProps) {
   useEffect(() => {
     // 1. Update document title
     document.title = title;
@@ -67,7 +68,34 @@ export function SeoHead({ title, description, path, project }: SeoProps) {
       ]
     };
 
-    if (project) {
+    if (blogPost) {
+      // Create BlogPosting schema combined with Person schema as publisher
+      schemaData = {
+        "@context": "https://schema.org",
+        "@graph": [
+          personSchema,
+          {
+            "@type": "BlogPosting",
+            "@id": `https://sabeer-ai.vercel.app/blog/${blogPost.id}/#post`,
+            "isPartOf": {
+              "@type": "WebPage",
+              "@id": `https://sabeer-ai.vercel.app/blog/${blogPost.id}`
+            },
+            "headline": blogPost.title,
+            "description": blogPost.excerpt,
+            "datePublished": "2026-05-22T00:00:00+00:00",
+            "author": {
+              "@id": "https://sabeer-ai.vercel.app/#person"
+            },
+            "publisher": {
+              "@id": "https://sabeer-ai.vercel.app/#person"
+            },
+            "url": `https://sabeer-ai.vercel.app/blog/${blogPost.id}`,
+            "keywords": blogPost.tags.join(', ')
+          }
+        ]
+      };
+    } else if (project) {
       // Create CreativeWork schema combined with Person schema as publisher
       schemaData = {
         "@context": "https://schema.org",
@@ -120,7 +148,7 @@ export function SeoHead({ title, description, path, project }: SeoProps) {
         toClean.remove();
       }
     };
-  }, [title, description, path, project]);
+  }, [title, description, path, project, blogPost]);
 
   return null;
 }

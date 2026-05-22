@@ -35,6 +35,7 @@ export default function App() {
   let activePageTitle = "Mustapha “Sabeer” Abdulsalam | Frontend Developer";
   let activePageDesc = "Mustapha Sabeer Abdulsalam (Sabeer-Verse) is a frontend developer, AI builder, and software engineer.";
   let currentProject = undefined;
+  let activeBlogPost = undefined;
 
   let activeComponent = <HomeView navigate={navigate} />;
 
@@ -68,6 +69,19 @@ export default function App() {
     activePageTitle = "Blog | Sabeer-Verse";
     activePageDesc = "Read articles by Sabeer about clean web development, tech insights, and system design.";
     activeComponent = <BlogView navigate={navigate} />;
+  } else if (currentPath.startsWith('/blog/')) {
+    const slug = currentPath.substring('/blog/'.length);
+    const resolvedPost = BLOG_POSTS.find(p => p.id === slug);
+    if (resolvedPost) {
+      activePageTitle = `${resolvedPost.title} | Sabeer-Verse Blog`;
+      activePageDesc = resolvedPost.excerpt;
+      activeBlogPost = resolvedPost;
+      activeComponent = <BlogView navigate={navigate} activeSlug={slug} />;
+    } else {
+      activePageTitle = "404 - Post Not Found";
+      activePageDesc = "The requested blog post does not exist.";
+      activeComponent = <BlogView navigate={navigate} />;
+    }
   } else if (currentPath === '/contact') {
     activePageTitle = "Contact Sabeer | Mustapha Abdulsalam";
     activePageDesc = "Connect or contact Mustapha Sabeer Abdulsalam for collaboration and networking.";
@@ -132,6 +146,7 @@ export default function App() {
         description={activePageDesc} 
         path={currentPath} 
         project={currentProject} 
+        blogPost={activeBlogPost}
       />
 
       {/* Navigation Bar */}

@@ -5,17 +5,90 @@ import { BookOpen, Calendar, ArrowLeft, ArrowRight, BookMarked, User } from 'luc
 
 interface BlogViewProps {
   navigate: (to: string) => void;
+  activeSlug?: string;
 }
 
-export function BlogView({ navigate }: BlogViewProps) {
-  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
+export function BlogView({ navigate, activeSlug }: BlogViewProps) {
+  // Find resolved post from url path or fall back to local interactive tracking
+  const resolvedActivePost = activeSlug ? BLOG_POSTS.find(p => p.id === activeSlug) || null : null;
+  const [selectedPostState, setSelectedPostState] = useState<BlogPost | null>(null);
 
-  if (selectedPost) {
+  const activePost = resolvedActivePost || selectedPostState;
+
+  // Tiny inline parser to render semantically polished subheadings and bold treatments
+  const renderInlineStyle = (text: string) => {
+    // Pattern for matching **bold** items
+    const parts = text.split(/(\*\*.*?\*\*)/g);
+    return parts.map((part, i) => {
+      if (part.startsWith('**') && part.endsWith('**')) {
+        return <strong key={i} className="font-bold text-zinc-950">{part.slice(2, -2)}</strong>;
+      }
+      return part;
+    });
+  };
+
+  const renderContentBlock = (blockText: string, blockIdx: number) => {
+    const text = blockText.trim();
+    if (!text) return null;
+
+    if (text.startsWith('### ')) {
+      return (
+        <h3 key={blockIdx} className="text-lg sm:text-xl font-sans font-extrabold text-zinc-900 mt-8 mb-3 tracking-tight">
+          {text.replace('### ', '')}
+        </h3>
+      );
+    }
+    if (text.startsWith('## ')) {
+      return (
+        <h2 key={blockIdx} className="text-xl sm:text-2xl font-sans font-black text-zinc-900 mt-10 mb-4 tracking-tight">
+          {text.replace('## ', '')}
+        </h2>
+      );
+    }
+    if (text.startsWith('- ') || text.startsWith('* ')) {
+      const items = text.split('\n');
+      return (
+        <ul key={blockIdx} className="list-disc list-inside space-y-1 my-4 pl-1 text-zinc-750">
+          {items.map((item, itemIdx) => (
+            <li key={itemIdx} className="text-sm sm:text-base leading-relaxed">
+              {renderInlineStyle(item.replace(/^[-*]\s+/, ''))}
+            </li>
+          ))}
+        </ul>
+      );
+    }
+    if (/^\d+\.\s+/.test(text)) {
+      const items = text.split('\n');
+      return (
+        <ol key={blockIdx} className="list-decimal list-inside space-y-1.5 my-4 pl-1 text-zinc-750">
+          {items.map((item, itemIdx) => (
+            <li key={itemIdx} className="text-sm sm:text-base leading-relaxed">
+              {renderInlineStyle(item.replace(/^\d+\.\s+/, ''))}
+            </li>
+          ))}
+        </ol>
+      );
+    }
+
+    return (
+      <p key={blockIdx} className="leading-relaxed text-zinc-700 text-sm sm:text-base mb-4">
+        {renderInlineStyle(text)}
+      </p>
+    );
+  };
+
+  if (activePost) {
     return (
       <div className="py-8 px-4 max-w-2xl mx-auto space-y-10 text-left animate-fadeIn">
         {/* Back To Articles Button */}
         <button
-          onClick={() => setSelectedPost(null)}
+          onClick={() => {
+            if (activeSlug) {
+              navigate('/blog');
+            } else {
+              setSelectedPostState(null);
+            }
+          }}
           className="text-xs font-mono text-zinc-400 hover:text-zinc-950 transition-colors flex items-center space-x-1.5"
         >
           <ArrowLeft size={12} />
@@ -23,19 +96,19 @@ export function BlogView({ navigate }: BlogViewProps) {
         </button>
 
         {/* Article Metadata */}
-        <article className="space-y-6" id={`blog-post-content-${selectedPost.id}`}>
+        <article className="space-y-6" id={`blog-post-content-${activePost.id}`}>
           <div className="space-y-3">
             <div className="flex items-center space-x-3 text-xs font-mono text-zinc-400">
               <span className="flex items-center gap-1">
                 <Calendar size={12} />
-                {selectedPost.date}
+                {activePost.date}
               </span>
               <span>•</span>
-              <span>{selectedPost.readTime}</span>
+              <span>{activePost.readTime}</span>
             </div>
             
             <h1 className="text-3xl sm:text-4xl font-sans font-black text-zinc-900 tracking-tight leading-snug">
-              {selectedPost.title}
+              {activePost.title}
             </h1>
 
             {/* Author Block */}
@@ -49,22 +122,18 @@ export function BlogView({ navigate }: BlogViewProps) {
           </div>
 
           {/* Core Body Container with Premium Editorial Spacing */}
-          <div className="prose prose-zinc max-w-none text-zinc-700 font-sans text-sm sm:text-base leading-relaxed space-y-6">
-            <p className="font-medium text-zinc-900 text-base sm:text-lg leading-snug">
-              {selectedPost.excerpt}
+          <div className="prose prose-zinc max-w-none text-zinc-700 font-sans text-sm sm:text-base leading-relaxed space-y-4">
+            <p className="font-medium text-zinc-900 text-sm sm:text-base leading-snug">
+              {activePost.excerpt}
             </p>
-            {selectedPost.content.split('\n\n').map((paragraph, pIdx) => (
-              <p key={pIdx}>
-                {paragraph}
-              </p>
-            ))}
+            {activePost.content.split('\n\n').map((block, idx) => renderContentBlock(block, idx))}
           </div>
 
           {/* Tags Footer Section */}
           <div className="pt-8 border-t border-zinc-100 space-y-4">
             <span className="text-xs font-mono text-zinc-400 uppercase tracking-wider block">Indexed Search Taxonomy</span>
             <div className="flex flex-wrap gap-1.5">
-              {selectedPost.tags.map((tag) => (
+              {activePost.tags.map((tag) => (
                 <span key={tag} className="text-xs bg-zinc-50 border border-zinc-100 text-zinc-600 px-2.5 py-1 rounded font-mono">
                   #{tag}
                 </span>
@@ -76,7 +145,13 @@ export function BlogView({ navigate }: BlogViewProps) {
         {/* Back navigation shortcuts */}
         <div className="pt-12 border-t border-zinc-100 flex justify-between items-center" id="article-detail-footer">
           <button
-            onClick={() => setSelectedPost(null)}
+            onClick={() => {
+              if (activeSlug) {
+                navigate('/blog');
+              } else {
+                setSelectedPostState(null);
+              }
+            }}
             className="text-xs font-mono text-zinc-400 hover:text-zinc-950 transition-colors"
           >
             ← View all articles
@@ -115,7 +190,7 @@ export function BlogView({ navigate }: BlogViewProps) {
         {BLOG_POSTS.map((post) => (
           <article 
             key={post.id}
-            onClick={() => setSelectedPost(post)}
+            onClick={() => navigate('/blog/' + post.id)}
             className="group border border-zinc-100 p-6 sm:p-8 rounded-xl bg-white hover:border-zinc-300 hover:shadow-[0_2px_12px_rgba(0,0,0,0.01)] transition-all cursor-pointer space-y-4"
             id={`blog-card-${post.id}`}
           >
