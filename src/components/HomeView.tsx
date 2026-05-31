@@ -19,21 +19,21 @@ export function HomeView({ navigate }: HomeViewProps) {
 
         {/* H1 - Exactly one per page */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-sans tracking-tight font-extrabold text-zinc-900 leading-[1.1]" id="main-identity-h1">
-          Mustapha &ldquo;Sabeer&rdquo; Abdulsalam
+          Mustapha Abdulsalam
         </h1>
 
         {/* H2 - Subheading */}
         <h2 className="text-md sm:text-xl font-mono text-zinc-500 tracking-tight font-medium" id="identity-h2">
-          Frontend Developer · AI Builder · Prompt Engineer · Graphic Designer
+          Frontend Developer &amp; AI Builder
         </h2>
 
         {/* SEO Paragraph */}
-        <div className="space-y-6 max-w-2xl text-[#444] text-base sm:text-lg leading-relaxed font-sans" id="seo-brand-text">
+        <div className="space-y-4 max-w-2xl text-[#444] text-base sm:text-lg leading-relaxed font-sans" id="seo-brand-text">
           <p>
-            Mustapha &ldquo;Sabeer&rdquo; Abdulsalam, also known as <strong className="text-zinc-950 font-medium">Sabeer-Verse</strong>, is a frontend developer who loves building fast <span className="text-zinc-950 font-medium">web apps</span>, friendly <span className="text-zinc-950 font-medium">AI integrations</span>, and clean visual designs.
+            I am <strong className="text-zinc-950 font-semibold">Mustapha Abdulsalam</strong>, also known as <strong className="text-zinc-950 font-semibold">Sabeer</strong>. As a frontend developer and AI builder in Nigeria, I craft high-performance web applications and intelligent interfaces with absolute pixel precision.
           </p>
           <p>
-            He builds responsive interfaces with clear state management and smooth interactions. Check out his key projects like <span className="text-zinc-950 font-medium cursor-pointer underline decoration-zinc-300 hover:decoration-zinc-800" onClick={() => navigate('/projects/zero-bank')}>Zero Bank</span>, a web application that visualizes real-time bank transactions and transfers clearly.
+            Explore my featured work, including the <span className="text-zinc-950 font-medium cursor-pointer underline decoration-zinc-300 hover:decoration-zinc-855 transition-colors" onClick={() => navigate('/projects/zero-bank')}>Zero Bank fintech project</span> and <span className="text-zinc-950 font-medium cursor-pointer underline decoration-zinc-300 hover:decoration-zinc-855 transition-colors" onClick={() => navigate('/projects/aura-pay')}>Aura Pay</span>.
           </p>
         </div>
 

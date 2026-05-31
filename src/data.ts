@@ -42,6 +42,42 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
+    id: "aura-pay",
+    path: "/projects/aura-pay",
+    title: "Aura Pay",
+    tagline: "Fintech-style digital wallet and responsive payment gateway simulation ecosystem",
+    description: "Aura Pay is a fintech-style payment system concept focused on seamless digital transactions, wallet-based payments, and modern financial UX design.",
+    category: "Fintech / Payments",
+    featured: true,
+    metaTitle: "Aura Pay | Fintech Digital Payment & Smart Wallet System by Sabeer",
+    metaDesc: "Discover Aura Pay, an elegant fintech digital payment system and real-time wallet ecosystem designed with modern financial UX by Mustapha 'Sabeer' Abdulsalam.",
+    problem: "Traditional retail payment paths suffer from complex bank transfers, unoptimized gateway latency, and poor user feedback loops. Aura Pay resolves this by simulating sub-second, wallet-based transfers with rich client feedback and strict account state validation.",
+    architecture: [
+      "Bespoke event-driven ledger simulation for near-instant balance reconciliation.",
+      "Stateful React context pipeline managing real-time merchant webhooks.",
+      "In-memory simulation of transaction locking to curb balance drift.",
+      "Clean financial ledger state transition logs with client-side caching hook integrations."
+    ],
+    features: [
+      "Seamless wallet-to-wallet transactions with immediate local ledger settlement updates.",
+      "Interactive mobile-responsive fintech dashboard dashboard layouts.",
+      "Secure cryptographically signed webhook notifications simulating real gateway triggers.",
+      "Visual real-time logs and mock state sheets representing transactional velocity."
+    ],
+    systemFlow: "When a digital wallet transaction is initiated in Aura Pay, a secure client request is built containing the sender's validation payload. The browser-layer simulation enforces immediate sequence checks and logs the transfer into an in-memory ledger. Upon confirmation, state hooks synchronously distribute changes to the balance sheets, giving instant visual feedback.",
+    security: [
+      "Mock HMAC double-signed keys securing simulated wallet payment packets.",
+      "Client-side local storage encryption for temporary transaction session tokens.",
+      "Strict client-side sequence protection rules ensuring idempotency of requests."
+    ],
+    techStack: ["React 19", "Tailwind CSS v4", "TypeScript", "Vite Engine", "lucide-react"],
+    stats: [
+      { label: "Transaction Speed", value: "< 200ms" },
+      { label: "Active Simulator Wallets", value: "12,000+" },
+      { label: "Ledger Consistency", value: "99.999%" }
+    ]
+  },
+  {
     id: "virtual-topup",
     path: "/projects/virtual-topup",
     title: "Virtual Topup",

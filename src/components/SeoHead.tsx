@@ -60,6 +60,7 @@ export function SeoHead({ title, description, path, project, blogPost }: SeoProp
       "sameAs": [
         "https://linkedin.com/in/masabeer",
         "https://github.com/sabeerhub",
+        "https://medium.com/@masabeer",
         "https://x.com/_msabeer_",
         "https://youtube.com/@sabeer-io",
         "https://instagram.com/_m.sabeer_",

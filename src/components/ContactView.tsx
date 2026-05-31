@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Send, CheckCircle2, Copy, Link, Search, Linkedin, Github, Twitter, Youtube, Instagram, MessageSquare, ExternalLink } from 'lucide-react';
+import { Send, CheckCircle2, Copy, Link, Search, Linkedin, Github, Twitter, Youtube, Instagram, MessageSquare, ExternalLink, BookOpen } from 'lucide-react';
 
 export function ContactView() {
   const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' });
@@ -9,6 +9,7 @@ export function ContactView() {
   const socials = [
     { name: 'LinkedIn', url: 'https://LinkedIn.com/in/masabeer', handle: '@masabeer', icon: Linkedin },
     { name: 'GitHub', url: 'https://github.com/sabeerhub', handle: 'sabeerhub', icon: Github },
+    { name: 'Medium', url: 'https://medium.com/@masabeer', handle: '@masabeer', icon: BookOpen },
     { name: 'Twitter / X', url: 'https://x.com/_msabeer_', handle: '@_msabeer_', icon: Twitter },
     { name: 'YouTube', url: 'https://youtube.com/@sabeer-io', handle: '@sabeer-io', icon: Youtube },
     { name: 'Instagram', url: 'https://instagram.com/_m.sabeer_', handle: '@_m.sabeer_', icon: Instagram },

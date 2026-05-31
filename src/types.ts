@@ -4,7 +4,7 @@ export interface Project {
   title: string;
   tagline: string;
   description: string;
-  category: "Fintech" | "Telecom" | "AI Systems" | "Real-Time Systems" | "SaaS Core";
+  category: "Fintech" | "Telecom" | "AI Systems" | "Real-Time Systems" | "SaaS Core" | "Fintech / Payments";
   featured: boolean;
   metaTitle: string;
   metaDesc: string;
