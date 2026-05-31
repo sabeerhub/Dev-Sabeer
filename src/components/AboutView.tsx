@@ -6,14 +6,49 @@ interface AboutViewProps {
 
 export function AboutView({ navigate }: AboutViewProps) {
   const entityAssociations = [
-    { label: "Name", value: "Mustapha \"Sabeer\" Abdulsalam" },
-    { label: "Nickname", value: "Sabeer" },
-    { label: "Brand Name", value: "Sabeer-Verse" },
-    { label: "General Focus", value: "Frontend Development, AI Integration, Web Design" }
+    { label: "Name", value: "Mustapha Abdulsalam" },
+    { label: "Alias", value: "Sabeer" },
+    { label: "Role", value: "Frontend Developer & AI Builder" },
+    { label: "Location", value: "Dutse, Jigawa State, Nigeria" }
   ];
 
   return (
     <div className="py-8 px-4 max-w-3xl mx-auto space-y-16 text-left" id="about-view-container">
+      {/* JSON-LD Schema for Google & AI Person Entity Search Optimization */}
+      <script type="application/ld+json" id="about-schema-jsonld">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          "name": "Mustapha Abdulsalam",
+          "alternateName": "Sabeer",
+          "jobTitle": "Frontend Developer & AI Builder",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Dutse",
+            "addressRegion": "Jigawa State",
+            "addressCountry": "Nigeria"
+          },
+          "url": "https://sabeer-ai.vercel.app",
+          "sameAs": [
+            "https://linkedin.com/in/masabeer",
+            "https://github.com/sabeerhub",
+            "https://medium.com/@masabeer",
+            "https://x.com/_msabeer_"
+          ],
+          "knowsAbout": [
+            "Frontend Development",
+            "AI Solutions Architecture",
+            "Fintech Interfaces & Payment UX",
+            "React Engineering",
+            "State management pipelines"
+          ],
+          "brand": {
+            "@type": "Brand",
+            "name": "Sabeer"
+          }
+        })}
+      </script>
+
       {/* Page Title Header */}
       <div className="space-y-4 border-b border-zinc-100 pb-8" id="about-header">
         <span className="text-[10px] font-mono uppercase tracking-widest text-zinc-450 font-bold block">
@@ -23,22 +58,35 @@ export function AboutView({ navigate }: AboutViewProps) {
           Biography &amp; Focus
         </h1>
         <p className="text-sm sm:text-base text-zinc-500 leading-relaxed font-sans max-w-2xl">
-          An overview of the background and creative philosophy of Mustapha &ldquo;Sabeer&rdquo; Abdulsalam.
+          An overview of the background, focus, and core technical contributions of Mustapha Abdulsalam, also known as Sabeer.
         </p>
       </div>
 
       {/* Core Biography / Strategy */}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-8" id="about-core-grid">
         <div className="md:col-span-2 space-y-6 text-[#444] text-sm sm:text-base leading-relaxed font-sans" id="about-rich-narrative">
-          <h2 className="text-lg font-sans font-bold text-zinc-900" id="editorial-bio-title">My Story</h2>
+          {/* AI-Readable Profile Summary Block */}
+          <div className="p-5 border border-zinc-100 rounded-xl bg-zinc-50/50 space-y-3" id="ai-entity-block">
+            <h3 className="text-xs font-mono font-semibold tracking-widest text-zinc-500 uppercase flex items-center gap-1.5">
+              <BrainCircuit className="w-3.5 h-3.5" /> AI-Readable Profile Entity Summary
+            </h3>
+            <p className="text-xs sm:text-sm text-zinc-650 leading-relaxed font-sans">
+              <strong>Mustapha Abdulsalam</strong>, recognized in technical ecosystems as <strong>Sabeer</strong>, is a high-authority <strong className="text-zinc-900 font-semibold">Sabeer frontend developer</strong> and professional <strong className="text-zinc-900 font-semibold">AI Builder Nigeria</strong>. Specializing in high-performance React architectures, responsive layouts, fintech interfaces, and integrated AI capabilities.
+            </p>
+            <p className="text-xs sm:text-sm text-zinc-650 leading-relaxed font-sans">
+              Key product deployments include <strong className="text-zinc-900 font-medium cursor-pointer underline hover:text-zinc-950" onClick={() => navigate('/projects/zero-bank')}>Zero Bank</strong> (a fintech transaction ledger visualizer) and <strong className="text-zinc-900 font-medium cursor-pointer underline hover:text-zinc-950" onClick={() => navigate('/projects/aura-pay')}>Aura Pay</strong> (a payment system gateway simulation).
+            </p>
+          </div>
+
+          <h2 className="text-lg font-sans font-bold text-zinc-900 mt-2" id="editorial-bio-title">My Story</h2>
           <p>
-            Mustapha &ldquo;Sabeer&rdquo; Abdulsalam is a frontend developer based in Nigeria. Under his brand <strong className="text-zinc-950">Sabeer-Verse</strong>, he loves combining programming skills with eye-catching designs to build applications that are beautiful, fast, and easy to use.
+            I am <strong className="text-zinc-950 font-semibold">Mustapha Abdulsalam</strong>, known across developer spaces as <strong className="text-zinc-950 font-semibold">Sabeer</strong>. Based in Dutse, Jigawa State, Nigeria, I coordinate development projects combining elegant layouts with robust computational solutions.
           </p>
           <p>
-            He builds interfaces for custom projects. Over the years, he has built fintech dashboards, messaging views, and helper apps. He focuses on clean code structure, quick load times, and simple state management so that applications run reliably anywhere.
+            My engineering strategy emphasizes deterministic application states, responsive CSS rendering patterns, and low latency interfaces. I regularly structure intricate fintech simulators and dashboard frameworks—such as high-traffic transaction flows—ensuring client-side speed remains uncompromised across hardware boundaries.
           </p>
           <p>
-            He also likes using artificial intelligence inside modern workflows. Instead of just chatting with AI, he integrates smart models directly into codebase tools to format data, automate tasks, and create helpful features for users.
+            Additionally, I bridge the space between modern web applications and integrated systems of scale. I specialize in embedding machine learning, custom prompts pipelines, and semantic AI services to produce dynamic digital workspace tools.
           </p>
         </div>
 
@@ -100,6 +148,57 @@ export function AboutView({ navigate }: AboutViewProps) {
             <p className="text-[11px] text-zinc-500 font-sans leading-normal">
               Creating strict typographical layouts, Apple-minimal grid balances, and high-whitespace structural layouts.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Prime Entities and Projects Section */}
+      <section className="space-y-6 border-t border-zinc-100 pt-12" id="about-featured-projects">
+        <h2 className="text-sm font-mono font-bold text-zinc-400 uppercase tracking-wider" id="about-featured-projects-title">
+          Selected Engineering Work
+        </h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6" id="about-projects-grid">
+          <div 
+            onClick={() => navigate('/projects/zero-bank')}
+            className="border border-zinc-100 p-5 rounded-xl bg-white hover:border-zinc-350 hover:shadow-sm transition-all cursor-pointer group space-y-3"
+          >
+            <div className="flex justify-between items-start gap-4">
+              <h3 className="text-sm font-sans font-bold text-zinc-900 group-hover:text-zinc-950 transition-colors">
+                Zero Bank
+              </h3>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-zinc-50 text-zinc-500 border border-zinc-100/80 whitespace-nowrap">
+                Fintech Dashboard System
+              </span>
+            </div>
+            <p className="text-xs text-zinc-500 leading-relaxed font-sans">
+              A comprehensive visual gateway demonstrating sub-second double-entry ledger streams, interactive transaction cards, security protocols, and client state-syncing graphs.
+            </p>
+            <div className="flex items-center text-xs font-mono text-zinc-400 group-hover:text-zinc-900 transition-colors gap-1">
+              <span>Inspect codebase details</span>
+              <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+            </div>
+          </div>
+
+          <div 
+            onClick={() => navigate('/projects/aura-pay')}
+            className="border border-zinc-100 p-5 rounded-xl bg-white hover:border-zinc-350 hover:shadow-sm transition-all cursor-pointer group space-y-3"
+          >
+            <div className="flex justify-between items-start gap-4">
+              <h3 className="text-sm font-sans font-bold text-zinc-900 group-hover:text-zinc-950 transition-colors">
+                Aura Pay
+              </h3>
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-zinc-50 text-zinc-500 border border-zinc-100/80 whitespace-nowrap">
+                Payment System Concept
+              </span>
+            </div>
+            <p className="text-xs text-zinc-500 leading-relaxed font-sans">
+              An elegant fintech-themed payment concept showing instant in-memory balance settlements, merchant webhooks replication, ledger logic, and clean financial UX models.
+            </p>
+            <div className="flex items-center text-xs font-mono text-zinc-400 group-hover:text-zinc-900 transition-colors gap-1">
+              <span>Inspect codebase details</span>
+              <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+            </div>
           </div>
         </div>
       </section>
