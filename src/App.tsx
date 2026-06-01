@@ -39,21 +39,26 @@ export default function App() {
 
   let activeComponent = <HomeView navigate={navigate} />;
 
+  // Normalize path by stripping trailing slashes for clean matching (except on root "/")
+  const normalizedPath = currentPath.endsWith('/') && currentPath.length > 1 
+    ? currentPath.slice(0, -1) 
+    : currentPath;
+
   // Precise routing checks
-  if (currentPath === '/' || currentPath === '/index.html') {
+  if (normalizedPath === '/' || normalizedPath === '/index.html') {
     activePageTitle = "Mustapha “Sabeer” Abdulsalam | Sabeer-Verse Portfolio";
     activePageDesc = "Mustapha 'Sabeer' Abdulsalam is a frontend developer and software engineer from Nigeria. This is his official portfolio featuring fintech projects, AI experiments, and web design.";
     activeComponent = <HomeView navigate={navigate} />;
-  } else if (currentPath === '/about') {
+  } else if (normalizedPath === '/about') {
     activePageTitle = "About Mustapha Sabeer Abdulsalam | Sabeer-Verse";
     activePageDesc = "Biography, experience, and professional focus of Mustapha Sabeer Abdulsalam.";
     activeComponent = <AboutView navigate={navigate} />;
-  } else if (currentPath === '/projects') {
+  } else if (normalizedPath === '/projects') {
     activePageTitle = "Projects | Sabeer-Verse";
     activePageDesc = "Explore Sabeer's software projects: Zero Bank, Virtual Topup, Connect Call, and other developer tools.";
     activeComponent = <ProjectsView navigate={navigate} />;
-  } else if (currentPath.startsWith('/projects/')) {
-    const slug = currentPath.substring('/projects/'.length);
+  } else if (normalizedPath.startsWith('/projects/')) {
+    const slug = normalizedPath.substring('/projects/'.length);
     const resolvedProj = PROJECTS.find(p => p.id === slug);
     if (resolvedProj) {
       currentProject = resolvedProj;
@@ -65,12 +70,12 @@ export default function App() {
       activePageDesc = "The requested page does not exist in Sabeer-Verse.";
       activeComponent = <ProjectDetailView projectId={slug} navigate={navigate} />;
     }
-  } else if (currentPath === '/blog') {
+  } else if (normalizedPath === '/blog') {
     activePageTitle = "Blog | Sabeer-Verse";
     activePageDesc = "Read articles by Sabeer about clean web development, tech insights, and system design.";
     activeComponent = <BlogView navigate={navigate} />;
-  } else if (currentPath.startsWith('/blog/')) {
-    const slug = currentPath.substring('/blog/'.length);
+  } else if (normalizedPath.startsWith('/blog/')) {
+    const slug = normalizedPath.substring('/blog/'.length);
     const resolvedPost = BLOG_POSTS.find(p => p.id === slug);
     if (resolvedPost) {
       activePageTitle = `${resolvedPost.title} | Sabeer-Verse Blog`;
@@ -82,7 +87,7 @@ export default function App() {
       activePageDesc = "The requested blog post does not exist.";
       activeComponent = <BlogView navigate={navigate} />;
     }
-  } else if (currentPath === '/contact') {
+  } else if (normalizedPath === '/contact') {
     activePageTitle = "Contact Sabeer | Mustapha Abdulsalam";
     activePageDesc = "Connect or contact Mustapha Sabeer Abdulsalam for collaboration and networking.";
     activeComponent = <ContactView />;
