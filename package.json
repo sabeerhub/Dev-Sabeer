@@ -3,6 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "overrides": {
+    "node-domexception": "file:./shims/node-domexception"
+  },
   "scripts": {
     "dev": "next dev -p 3000",
     "build": "next build",

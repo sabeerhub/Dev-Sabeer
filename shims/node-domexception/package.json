@@ -1,0 +1,13 @@
+{
+  "name": "node-domexception",
+  "version": "1.0.0",
+  "description": "Native globalThis.DOMException loader for modern Node.js environments without deprecation warnings",
+  "main": "index.js",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./index.js",
+      "require": "./index.cjs"
+    }
+  }
+}
