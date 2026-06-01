@@ -1,62 +1,42 @@
-import { useState, useEffect } from 'react';
-import { PROJECTS, BLOG_POSTS } from './data';
-import { SeoHead } from './components/SeoHead';
-import { Navigation } from './components/Navigation';
-import { HomeView } from './components/HomeView';
-import { AboutView } from './components/AboutView';
-import { ProjectsView } from './components/ProjectsView';
-import { ProjectDetailView } from './components/ProjectDetailView';
-import { BlogView } from './components/BlogView';
-import { ContactView } from './components/ContactView';
-import { Code, FileJson, ChevronDown, ChevronUp, Copy, CheckCircle, Search, ExternalLink } from 'lucide-react';
+'use client';
 
-export default function App() {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+import React, { useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { PROJECTS, BLOG_POSTS } from '@/src/data';
+import { Navigation } from '@/src/components/Navigation';
+import { SeoHead } from '@/src/components/SeoHead';
+import Link from 'next/link';
+import { FileJson, Copy, CheckCircle, ExternalLink } from 'lucide-react';
+
+interface AppLayoutProps {
+  children: React.ReactNode;
+}
+
+export function AppLayout({ children }: AppLayoutProps) {
+  const pathname = usePathname() || '/';
   const [showInspector, setShowInspector] = useState(false);
   const [copiedIndex, setCopiedIndex] = useState(false);
 
-  // Sync state with browser location
-  useEffect(() => {
-    const handlePopState = () => {
-      setCurrentPath(window.location.pathname);
-    };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+  // Normalize path by stripping trailing slashes for clean matching (except on root "/")
+  const normalizedPath = pathname.endsWith('/') && pathname.length > 1 
+    ? pathname.slice(0, -1) 
+    : pathname;
 
-  // Custom router navigate trigger
-  const navigate = (to: string) => {
-    window.history.pushState({}, '', to);
-    setCurrentPath(to);
-    window.scrollTo({ top: 0, behavior: 'instant' });
-  };
-
-  // Resolve active views and metadata
-  let activePageTitle = "Mustapha “Sabeer” Abdulsalam | Frontend Developer";
-  let activePageDesc = "Mustapha Sabeer Abdulsalam (Sabeer-Verse) is a frontend developer, AI builder, and software engineer.";
+  // Resolve active views and metadata context for Schema graphs
   let currentProject = undefined;
   let activeBlogPost = undefined;
+  let activePageTitle = "Mustapha “Sabeer” Abdulsalam | Frontend Developer";
+  let activePageDesc = "Mustapha Sabeer Abdulsalam (Sabeer-Verse) is a frontend developer, AI builder, and software engineer.";
 
-  let activeComponent = <HomeView navigate={navigate} />;
-
-  // Normalize path by stripping trailing slashes for clean matching (except on root "/")
-  const normalizedPath = currentPath.endsWith('/') && currentPath.length > 1 
-    ? currentPath.slice(0, -1) 
-    : currentPath;
-
-  // Precise routing checks
   if (normalizedPath === '/' || normalizedPath === '/index.html') {
     activePageTitle = "Mustapha “Sabeer” Abdulsalam | Sabeer-Verse Portfolio";
     activePageDesc = "Mustapha 'Sabeer' Abdulsalam is a frontend developer and software engineer from Nigeria. This is his official portfolio featuring fintech projects, AI experiments, and web design.";
-    activeComponent = <HomeView navigate={navigate} />;
   } else if (normalizedPath === '/about') {
     activePageTitle = "About Mustapha Sabeer Abdulsalam | Sabeer-Verse";
     activePageDesc = "Biography, experience, and professional focus of Mustapha Sabeer Abdulsalam.";
-    activeComponent = <AboutView navigate={navigate} />;
   } else if (normalizedPath === '/projects') {
     activePageTitle = "Projects | Sabeer-Verse";
     activePageDesc = "Explore Sabeer's software projects: Zero Bank, Virtual Topup, Connect Call, and other developer tools.";
-    activeComponent = <ProjectsView navigate={navigate} />;
   } else if (normalizedPath.startsWith('/projects/')) {
     const slug = normalizedPath.substring('/projects/'.length);
     const resolvedProj = PROJECTS.find(p => p.id === slug);
@@ -64,16 +44,13 @@ export default function App() {
       currentProject = resolvedProj;
       activePageTitle = resolvedProj.metaTitle;
       activePageDesc = resolvedProj.metaDesc;
-      activeComponent = <ProjectDetailView projectId={slug} navigate={navigate} />;
     } else {
       activePageTitle = "404 - Page Not Found";
       activePageDesc = "The requested page does not exist in Sabeer-Verse.";
-      activeComponent = <ProjectDetailView projectId={slug} navigate={navigate} />;
     }
   } else if (normalizedPath === '/blog') {
     activePageTitle = "Blog | Sabeer-Verse";
     activePageDesc = "Read articles by Sabeer about clean web development, tech insights, and system design.";
-    activeComponent = <BlogView navigate={navigate} />;
   } else if (normalizedPath.startsWith('/blog/')) {
     const slug = normalizedPath.substring('/blog/'.length);
     const resolvedPost = BLOG_POSTS.find(p => p.id === slug);
@@ -81,19 +58,13 @@ export default function App() {
       activePageTitle = `${resolvedPost.title} | Sabeer-Verse Blog`;
       activePageDesc = resolvedPost.excerpt;
       activeBlogPost = resolvedPost;
-      activeComponent = <BlogView navigate={navigate} activeSlug={slug} />;
     } else {
       activePageTitle = "404 - Post Not Found";
       activePageDesc = "The requested blog post does not exist.";
-      activeComponent = <BlogView navigate={navigate} />;
     }
   } else if (normalizedPath === '/contact') {
     activePageTitle = "Contact Sabeer | Mustapha Abdulsalam";
     activePageDesc = "Connect or contact Mustapha Sabeer Abdulsalam for collaboration and networking.";
-    activeComponent = <ContactView />;
-  } else {
-    // Catch-all fallback
-    activeComponent = <HomeView navigate={navigate} />;
   }
 
   // Generate current JSON Schema string for active inspection
@@ -113,6 +84,7 @@ export default function App() {
         "sameAs": [
           "https://linkedin.com/in/masabeer",
           "https://github.com/sabeerhub",
+          "https://medium.com/@masabeer",
           "https://x.com/_msabeer_",
           "https://youtube.com/@sabeer-io",
           "https://instagram.com/_m.sabeer_",
@@ -149,17 +121,17 @@ export default function App() {
       <SeoHead 
         title={activePageTitle} 
         description={activePageDesc} 
-        path={currentPath} 
+        path={pathname} 
         project={currentProject} 
         blogPost={activeBlogPost}
       />
 
       {/* Navigation Bar */}
-      <Navigation currentPath={currentPath} navigate={navigate} />
+      <Navigation currentPath={pathname} />
 
       {/* Main Page Area */}
       <main className="flex-grow max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-4" id="primary-view-container">
-        {activeComponent}
+        {children}
       </main>
 
       {/* Apple-level minimal footer */}
@@ -168,11 +140,11 @@ export default function App() {
           
           {/* Linked indices grid */}
           <div className="flex flex-wrap justify-center gap-6 text-[10px] font-mono text-zinc-400 uppercase tracking-widest pb-4" id="footer-directory-indexes">
-            <a href="/" onClick={(e) => { e.preventDefault(); navigate('/'); }} className="hover:text-zinc-900 transition-colors">Core [Home]</a>
-            <a href="/about" onClick={(e) => { e.preventDefault(); navigate('/about'); }} className="hover:text-zinc-900 transition-colors">Biography</a>
-            <a href="/projects" onClick={(e) => { e.preventDefault(); navigate('/projects'); }} className="hover:text-zinc-900 transition-colors">Software Directory</a>
-            <a href="/blog" onClick={(e) => { e.preventDefault(); navigate('/blog'); }} className="hover:text-zinc-900 transition-colors">Aviation Thoughts</a>
-            <a href="/contact" onClick={(e) => { e.preventDefault(); navigate('/contact'); }} className="hover:text-zinc-900 transition-colors">Backlink Hub</a>
+            <Link href="/" className="hover:text-zinc-900 transition-colors">Core [Home]</Link>
+            <Link href="/about" className="hover:text-zinc-900 transition-colors">Biography</Link>
+            <Link href="/projects" className="hover:text-zinc-900 transition-colors">Software Directory</Link>
+            <Link href="/blog" className="hover:text-zinc-900 transition-colors">Aviation Thoughts</Link>
+            <Link href="/contact" className="hover:text-zinc-900 transition-colors">Backlink Hub</Link>
           </div>
 
           <p className="text-xs text-zinc-450 font-sans leading-relaxed">
