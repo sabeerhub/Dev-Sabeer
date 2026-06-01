@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Allow Next.js static assets (CRITICAL FIX)
+Allow: /_next/static/
+Allow: /_next/image/
+Allow: /static/
+
 Sitemap: https://sabeer-ai.vercel.app/sitemap.xml
