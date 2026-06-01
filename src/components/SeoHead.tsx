@@ -51,7 +51,12 @@ export function SeoHead({ title, description, path, project, blogPost }: SeoProp
       "@id": "https://sabeer-ai.vercel.app/#person",
       "name": "Mustapha Abdulsalam",
       "alternateName": "Sabeer",
-      "jobTitle": "Frontend Developer & AI Solutions Builder",
+      "jobTitle": "Frontend Developer",
+      "nationality": "Nigerian",
+      "founder": {
+        "@type": "Organization",
+        "name": "Sabeer-Verse"
+      },
       "brand": {
         "@type": "Brand",
         "name": "Sabeer-Verse"
@@ -66,6 +71,15 @@ export function SeoHead({ title, description, path, project, blogPost }: SeoProp
         "https://instagram.com/_m.sabeer_",
         "https://tiktok.com/@_m.sabeer_",
         "https://t.me/sabeer_xt"
+      ],
+      "knowsAbout": [
+        "Frontend Engineering",
+        "Artificial Intelligence",
+        "Web Development",
+        "Fintech Systems",
+        "Prompt engineer",
+        "graphics designer",
+        "content creator"
       ]
     };
 

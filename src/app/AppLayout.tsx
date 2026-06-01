@@ -25,12 +25,12 @@ export function AppLayout({ children }: AppLayoutProps) {
   // Resolve active views and metadata context for Schema graphs
   let currentProject = undefined;
   let activeBlogPost = undefined;
-  let activePageTitle = "Mustapha “Sabeer” Abdulsalam | Frontend Developer";
-  let activePageDesc = "Mustapha Sabeer Abdulsalam (Sabeer-Verse) is a frontend developer, AI builder, and software engineer.";
+  let activePageTitle = "Mustapha Abdulsalam (Sabeer) | Frontend Developer & AI Builder";
+  let activePageDesc = "Mustapha Abdulsalam (Sabeer) is a Frontend Developer, AI Builder, and Founder of Sabeer-Verse from Nigeria. He builds AI-powered web applications, fintech systems, and modern digital experiences.";
 
   if (normalizedPath === '/' || normalizedPath === '/index.html') {
-    activePageTitle = "Mustapha “Sabeer” Abdulsalam | Sabeer-Verse Portfolio";
-    activePageDesc = "Mustapha 'Sabeer' Abdulsalam is a frontend developer and software engineer from Nigeria. This is his official portfolio featuring fintech projects, AI experiments, and web design.";
+    activePageTitle = "Mustapha Abdulsalam (Sabeer) | Frontend Developer & AI Builder";
+    activePageDesc = "Mustapha Abdulsalam (Sabeer) is a Frontend Developer, AI Builder, and Founder of Sabeer-Verse from Nigeria. He builds AI-powered web applications, fintech systems, and modern digital experiences.";
   } else if (normalizedPath === '/about') {
     activePageTitle = "About Mustapha Sabeer Abdulsalam | Sabeer-Verse";
     activePageDesc = "Biography, experience, and professional focus of Mustapha Sabeer Abdulsalam.";
@@ -76,6 +76,12 @@ export function AppLayout({ children }: AppLayoutProps) {
         "@id": "https://sabeer-ai.vercel.app/#person",
         "name": "Mustapha Abdulsalam",
         "alternateName": "Sabeer",
+        "jobTitle": "Frontend Developer",
+        "nationality": "Nigerian",
+        "founder": {
+          "@type": "Organization",
+          "name": "Sabeer-Verse"
+        },
         "brand": {
           "@type": "Brand",
           "name": "Sabeer-Verse"
@@ -90,6 +96,15 @@ export function AppLayout({ children }: AppLayoutProps) {
           "https://instagram.com/_m.sabeer_",
           "https://tiktok.com/@_m.sabeer_",
           "https://t.me/sabeer_xt"
+        ],
+        "knowsAbout": [
+          "Frontend Engineering",
+          "Artificial Intelligence",
+          "Web Development",
+          "Fintech Systems",
+          "Prompt engineer",
+          "graphics designer",
+          "content creator"
         ]
       },
       currentProject ? {

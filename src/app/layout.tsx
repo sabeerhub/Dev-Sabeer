@@ -6,13 +6,27 @@ import { AppLayout } from "./AppLayout";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Mustapha “Sabeer” Abdulsalam | Frontend Developer",
-  description: "Mustapha 'Sabeer' Abdulsalam (Sabeer/Sabeer-Verse) is a frontend developer and fintech developer. Official portfolio featuring high-frequency systems and case studies like Zero Bank and Aura Pay.",
-  keywords: "Mustapha Abdulsalam, Sabeer, Sabeer frontend developer, sabeer fintech developer, sabeer AI builder, Sabeer-Verse, Zero Bank, Aura Pay, fintech developer, frontend developer, Nigeria developer",
-  authors: [{ name: "Mustapha 'Sabeer' Abdulsalam" }],
+  title: "Mustapha Abdulsalam (Sabeer) | Frontend Developer & AI Builder",
+  description: "Mustapha Abdulsalam (Sabeer) is a Frontend Developer, AI Builder, and Founder of Sabeer-Verse from Nigeria. He builds AI-powered web applications, fintech systems, and modern digital experiences.",
+  keywords: "Mustapha Abdulsalam, Sabeer, Sabeer-Verse, Frontend Developer, AI Builder, Nigerian, Prompt engineer, graphics designer, content creator, web development, fintech systems",
+  authors: [{ name: "Mustapha Abdulsalam" }],
   robots: {
     index: true,
     follow: true,
+  },
+  openGraph: {
+    title: "Mustapha Abdulsalam (Sabeer) | Frontend Developer & AI Builder",
+    description: "Mustapha Abdulsalam (Sabeer) is a Frontend Developer, AI Builder, and Founder of Sabeer-Verse, building AI-powered web applications, fintech systems, and modern digital products.",
+    url: "https://sabeer-ai.vercel.app",
+    siteName: "Sabeer-Verse",
+    locale: "en_NG",
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mustapha Abdulsalam (Sabeer) | Frontend Developer & AI Builder",
+    description: "Mustapha Abdulsalam (Sabeer) is a Frontend Developer, AI Builder, and Founder of Sabeer-Verse, building AI-powered web applications, fintech systems, and modern digital products.",
+    creator: "@_msabeer_",
   },
   other: {
     "google-site-verification": "nMvia17foXF63m1rRA3LQjeX2dTAyhd3uP3FqqD87uA",
@@ -38,7 +52,12 @@ export default function RootLayout({
               "@id": "https://sabeer-ai.vercel.app/#person",
               "name": "Mustapha Abdulsalam",
               "alternateName": "Sabeer",
-              "jobTitle": "Frontend Developer & Fintech Solutions Builder",
+              "jobTitle": "Frontend Developer",
+              "nationality": "Nigerian",
+              "founder": {
+                "@type": "Organization",
+                "name": "Sabeer-Verse"
+              },
               "brand": {
                 "@type": "Brand",
                 "name": "Sabeer-Verse"
@@ -56,11 +75,12 @@ export default function RootLayout({
               ],
               "knowsAbout": [
                 "Frontend Engineering",
-                "AI Architecture",
-                "Prompt Engineering",
-                "Financial Technology Systems",
-                "Real-Time Protocols",
-                "Typography & Graphic Design"
+                "Artificial Intelligence",
+                "Web Development",
+                "Fintech Systems",
+                "Prompt engineer",
+                "graphics designer",
+                "content creator"
               ]
             })
           }}
